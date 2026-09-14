@@ -1,6 +1,26 @@
 ﻿<!doctype html>
 <html lang="en">
   <head>
+
+    <script>
+    // Unregister any failing service workers and bypass SW requirement completely
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+      // Mock register to always resolve so the game continues booting
+      navigator.serviceWorker.register = function() {
+        return Promise.resolve({
+          active: { postMessage: function() {} },
+          addEventListener: function() {},
+          scope: window.location.href
+        });
+      };
+    }
+    </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
