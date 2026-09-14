@@ -1,33 +1,13 @@
 ﻿<!doctype html>
 <html lang="en">
   <head>
-
-    <script>
-    // Unregister any failing service workers and bypass SW requirement completely
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
-      // Mock register to always resolve so the game continues booting
-      navigator.serviceWorker.register = function() {
-        return Promise.resolve({
-          active: { postMessage: function() {} },
-          addEventListener: function() {},
-          scope: window.location.href
-        });
-      };
-    }
-    </script>
-
     <meta charset="UTF-8" />
-    <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48" />
-    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="./android-chrome-512x512.png" sizes="512x512" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180" />
-    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/android-chrome-512x512.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#12376f" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Google Docs</title>
@@ -38,64 +18,13 @@
         window.location.replace('https://classroom.google.com');
       }
     });
-
-    // Native Fullscreen Toggle
-    function toggleSiteFullscreen() {
-      const doc = document.documentElement;
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (doc.requestFullscreen) {
-          doc.requestFullscreen();
-        } else if (doc.webkitRequestFullscreen) {
-          doc.webkitRequestFullscreen();
-        } else if (doc.msRequestFullscreen) {
-          doc.msRequestFullscreen();
-        }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        }
-      }
-    }
     </script>
-    <script type="module" crossorigin src="./assets/index-BVYIX5vW.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DuJ696ty.css">
+    <script type="module" crossorigin src="/assets/index-BVYIX5vW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuJ696ty.css">
+  </head>
+  <body>
+    <div id="app"></div>
     <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background: #11141c;
-      }
-      #guyzmodz-fs-btn {
-        position: fixed;
-        top: 14px;
-        right: 14px;
-        z-index: 999999;
-        background: linear-gradient(135deg, #ff0055, #7a00ff);
-        color: #ffffff;
-        border: 2px solid rgba(255, 255, 255, 0.7);
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 13px;
-        font-weight: 700;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.8);
-        transition: transform 0.15s ease;
-      }
-      #guyzmodz-fs-btn:hover {
-        transform: scale(1.05);
-      }
-      #guyzmodz-fs-btn:active {
-        transform: scale(0.95);
-      }
       #guyzmodz-watermark {
         position: fixed;
         bottom: 12px;
@@ -120,15 +49,6 @@
         100% { background-position: 0% 50%; }
       }
     </style>
-  </head>
-  <body>
-    <button id="guyzmodz-fs-btn" onclick="toggleSiteFullscreen()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-      </svg>
-      Fullscreen
-    </button>
-    <div id="app"></div>
     <div id="guyzmodz-watermark">Made by GuyzModz</div>
   </body>
 </html>
