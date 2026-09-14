@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/android-chrome-512x512.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#12376f" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Google Docs</title>
+    <script>
+    // Tab Disguise & Panic Key for school Chromebooks/devices
+    window.addEventListener('keydown', function(e) {
+      if (e.key === '`') { // Pressing backtick ` instantly redirects to Clever / Classroom
+        window.location.replace('https://classroom.google.com');
+      }
+    });
+    </script>
+    <script type="module" crossorigin src="/assets/index-BVYIX5vW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuJ696ty.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <style>
+      #guyzmodz-watermark {
+        position: fixed;
+        bottom: 12px;
+        right: 18px;
+        z-index: 999999;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        pointer-events: none;
+        user-select: none;
+        background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbowWatermark 6s linear infinite;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.85));
+      }
+      @keyframes rainbowWatermark {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
+    <div id="guyzmodz-watermark">Made by GuyzModz</div>
+  </body>
+</html>

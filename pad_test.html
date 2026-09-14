@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gamepad Hardware Diagnostics</title>
+  <style>
+    body { font-family: monospace; background: #0b132b; color: #fff; padding: 24px; font-size: 16px; }
+    h1 { color: #48cae4; }
+    .status-box { background: #1c2541; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #3a506b; }
+    .btn { display: inline-block; padding: 6px 12px; margin: 4px; border-radius: 4px; background: #3a506b; min-width: 40px; text-align: center; }
+    .btn.pressed { background: #48cae4; color: #000; font-weight: bold; }
+    .axis-bar { height: 12px; background: #3a506b; border-radius: 6px; margin: 8px 0; overflow: hidden; }
+    .axis-fill { height: 100%; width: 50%; background: #5bc0be; transition: width 0.05s; }
+  </style>
+</head>
+<body>
+  <h1>Gamepad Diagnostic & Calibration Test</h1>
+  <p>Press any button on your controller to activate browser polling.</p>
+  <div id="output">No gamepads detected yet. Click this window and press any controller button.</div>
+
+  <script>
+    function update() {
+      const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+      let found = false;
+      let html = "";
+
+      for (let i = 0; i < pads.length; i++) {
+        const p = pads[i];
+        if (!p) continue;
+        found = true;
+        html += `<div class="status-box">`;
+        html += `<h3>[Pad #${p.index}] ${p.id}</h3>`;
+        html += `<p><b>Mapping:</b> "${p.mapping}" | <b>Connected:</b> ${p.connected}</p>`;
+
+        html += `<h4>Buttons (0 - ${p.buttons.length - 1})</h4><div>`;
+        p.buttons.forEach((btn, idx) => {
+          const isDown = btn.pressed || btn.value > 0.1;
+          const val = btn.value.toFixed(2);
+          html += `<span class="btn ${isDown ? 'pressed' : ''}">B${idx}: ${val}</span>`;
+        });
+        html += `</div>`;
+
+        html += `<h4>Axes (Analog Sticks / Triggers)</h4>`;
+        p.axes.forEach((val, idx) => {
+          const pct = ((val + 1) / 2 * 100).toFixed(1);
+          html += `<div>Axis ${idx}: ${val.toFixed(3)}</div>`;
+          html += `<div class="axis-bar"><div class="axis-fill" style="width: ${pct}%"></div></div>`;
+        });
+
+        html += `</div>`;
+      }
+
+      if (found) {
+        document.getElementById("output").innerHTML = html;
+      }
+      requestAnimationFrame(update);
+    }
+    window.addEventListener("gamepadconnected", () => console.log("Gamepad connected"));
+    requestAnimationFrame(update);
+  </script>
+</body>
+</html>
